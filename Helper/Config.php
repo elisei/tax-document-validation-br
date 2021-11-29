@@ -24,11 +24,11 @@ class Config extends AbstractHelper
 
     protected const CONFIG_PATH_TAXVAT = 'tax_document_validation_br/general/taxvat/%s';
 
-    protected const VAT_ONLY_CPF = 'vatid-br-rule-only-cpf';
+    public const VAT_ONLY_CPF = 'vatid-br-rule-only-cpf';
 
-    protected const VAT_ONLY_CNPJ = 'vatid-br-rule-only-cnpj';
+    public const VAT_ONLY_CNPJ = 'vatid-br-rule-only-cnpj';
 
-    protected const VAT_CPF_OR_CNPJ = 'vatid-br-rule-cpf-or-cnpj';
+    public const VAT_CPF_OR_CNPJ = 'vatid-br-rule-cpf-or-cnpj';
 
     /**
      * @var ScopeConfigInterface
