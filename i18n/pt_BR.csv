@@ -13,6 +13,6 @@ Enabled,Habilitado
 "Collect the VatId","Coletar o CPF/CNPJ no formulário de endereço"
 "Check if it is a valid CPF","Verificar se é um CPF válido"
 "Check if it is a valid CNPJ","Verificar se é um CNPJ válido"
-"Field Taxvat","Campo Taxvat - Documento Fiscal (CPF/CNPJ)""
+"Field Taxvat","Campo Taxvat - Documento Fiscal (CPF/CNPJ)"
 "Implementation of the taxvat input. Taxvat is an attribute of the customer, present on the registration form","Implementação de regra para a campo taxvat. O taxvat é um atributo de criação de conta"
 "Collect the Taxvat","Coletar o CPF/CNPJ no formulário de criação de conta"
