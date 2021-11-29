@@ -18,11 +18,11 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class Config extends AbstractHelper
 {
-    protected const CONFIG_PATH_GENERAL = 'tax_document_validation_br/general/%s';
+    public const CONFIG_PATH_GENERAL = 'tax_document_validation_br/general/%s';
 
-    protected const CONFIG_PATH_VAT_ID = 'tax_document_validation_br/general/vat_id/%s';
+    public const CONFIG_PATH_VAT_ID = 'tax_document_validation_br/general/vat_id/%s';
 
-    protected const CONFIG_PATH_TAXVAT = 'tax_document_validation_br/general/taxvat/%s';
+    public const CONFIG_PATH_TAXVAT = 'tax_document_validation_br/general/taxvat/%s';
 
     public const VAT_ONLY_CPF = 'vatid-br-rule-only-cpf';
 
