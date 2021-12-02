@@ -28,13 +28,17 @@ Implemente a regra de validação:
 
 Nos campos nativos da Magento.
 
-## VatId
+### Implementação em VatId
 
 Esse campo está presente de forma nativa no formulários de endereço da conta de cliente e no formulário de endereço no checkout.
 
-## Taxvat
+### Implementação em Taxvat
 
 Esse campo está presente apenas no formulário de clientes (customer create account).
+
+## Instalação e Configuração
+
+Visite nossa [Wiki](wiki) e veja como configurar e instalar nosso módulo.
 
 ## License
 
