@@ -129,11 +129,8 @@ class CheckoutTaxDocumentValidationBrAddRule
      *
      * @return array
      */
-    public function aroundProcess(
-        /** @scrutinizer ignore-unused */ LayoutProcessor $layoutProcessor,
-        callable $proceed,
-        array $args
-    ): array {
+    public function aroundProcess(LayoutProcessor $layoutProcessor, callable $proceed, array $args): array
+    {
         $jsLayout = $proceed($args);
         if ($this->config->isEnabled()) {
             $jsLayout = $this->changeCreateAccount($jsLayout);
