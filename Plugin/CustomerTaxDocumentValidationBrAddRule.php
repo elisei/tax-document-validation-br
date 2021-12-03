@@ -58,12 +58,13 @@ class CustomerTaxDocumentValidationBrAddRule
                 $result .= $add;
             }
         } elseif ($args == 'taxvat') {
+            $add = ' ';
             if ($this->config->getConfigByTaxvat('enabled_cpf') && $this->config->getConfigByTaxvat('enabled_cnpj')) {
-                $add = Config::VAT_CPF_OR_CNPJ;
+                $add .= Config::VAT_CPF_OR_CNPJ;
             } elseif ($this->config->getConfigByTaxvat('enabled_cpf')) {
-                $add = Config::VAT_ONLY_CPF;
+                $add .= Config::VAT_ONLY_CPF;
             } elseif ($this->config->getConfigByTaxvat('enabled_cnpj')) {
-                $add = Config::VAT_ONLY_CNPJ;
+                $add .= Config::VAT_ONLY_CNPJ;
             }
 
             $result .= $add;
