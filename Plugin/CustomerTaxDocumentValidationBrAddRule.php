@@ -42,7 +42,8 @@ class CustomerTaxDocumentValidationBrAddRule
      * @return string
      */
     public function aroundGetAttributeValidationClass(
-        /** @scrutinizer ignore-unused */ Address $subject,
+        /** @scrutinizer ignore-unused */ 
+        Address $subject,
         callable $proceed,
         string $args
     ): string {
