@@ -59,7 +59,7 @@ class Config extends AbstractHelper
      *
      * @return string
      */
-    public function getConfigModule(string $field): ?string
+    public function getConfigModule(string $field): ?bool
     {
         $storeId = $this->storeManagerInterface->getStore()->getId();
         $path = str_replace('%s', $field, self::CONFIG_PATH_GENERAL);
@@ -74,7 +74,7 @@ class Config extends AbstractHelper
      *
      * @return string
      */
-    public function getConfigByVatId(string $field): ?string
+    public function getConfigByVatId(string $field): ?bool
     {
         $storeId = $this->storeManagerInterface->getStore()->getId();
         $path = str_replace('%s', $field, self::CONFIG_PATH_VAT_ID);
@@ -89,7 +89,7 @@ class Config extends AbstractHelper
      *
      * @return string
      */
-    public function getConfigByTaxvat(string $field): ?string
+    public function getConfigByTaxvat(string $field): ?bool
     {
         $storeId = $this->storeManagerInterface->getStore()->getId();
         $path = str_replace('%s', $field, self::CONFIG_PATH_TAXVAT);
