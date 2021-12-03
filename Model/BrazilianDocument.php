@@ -11,9 +11,9 @@ namespace O2TI\TaxDocumentValidationBr\Model;
 use O2TI\TaxDocumentValidationBr\Helper\Config;
 
 /**
- *  ValidationBr - Add Validation Brazilian for Tax Document.
+ *  BrazilianDocument - Add Validation Brazilian for Tax Document.
  */
-class ValidationBr
+class BrazilianDocument
 {
     /**
      * @var Config

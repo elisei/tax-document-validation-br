@@ -35,17 +35,21 @@ class CustomerTaxDocumentValidationBrAddRule
     /**
      * Add Class to VatId.
      *
-     * @param Address $subject
-     * @param Address $result
-     * @param string  $attributeCode
+     * @param Address  $subject
+     * @param callable $proceed
+     * @param string   $args
      *
      * @return string
      */
-    public function afterGetAttributeValidationClass(Address $subject, $result, $attributeCode): ?string
-    {
-        if ($attributeCode == 'vat_id') {
+    public function aroundGetAttributeValidationClass(
+        /** @scrutinizer ignore-unused */ Address $subject,
+        callable $proceed,
+        string $args
+    ): string {
+        $result = $proceed($args);
+        if ($args == 'vat_id') {
             if ($this->config->isEnabled()) {
-                $add = ' required-entry ';
+                $add = 'required-entry ';
                 if ($this->config->getConfigByVatId('enabled_cpf') && $this->config->getConfigByVatId('enabled_cnpj')) {
                     $add .= Config::VAT_CPF_OR_CNPJ;
                 } elseif ($this->config->getConfigByVatId('enabled_cpf')) {
@@ -54,18 +58,19 @@ class CustomerTaxDocumentValidationBrAddRule
                     $add .= Config::VAT_ONLY_CNPJ;
                 }
 
-                return trim($result).$add;
+                $result .= $add;
             }
-        } elseif ($attributeCode == 'taxvat') {
+        } elseif ($args == 'taxvat') {
+            $add = ' ';
             if ($this->config->getConfigByTaxvat('enabled_cpf') && $this->config->getConfigByTaxvat('enabled_cnpj')) {
-                $add = Config::VAT_CPF_OR_CNPJ;
+                $add .= Config::VAT_CPF_OR_CNPJ;
             } elseif ($this->config->getConfigByTaxvat('enabled_cpf')) {
-                $add = Config::VAT_ONLY_CPF;
+                $add .= Config::VAT_ONLY_CPF;
             } elseif ($this->config->getConfigByTaxvat('enabled_cnpj')) {
-                $add = Config::VAT_ONLY_CNPJ;
+                $add .= Config::VAT_ONLY_CNPJ;
             }
 
-            return trim($result).' '.$add;
+            $result .= $add;
         }
 
         return $result;
