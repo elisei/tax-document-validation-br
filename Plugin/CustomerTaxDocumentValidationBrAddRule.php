@@ -45,7 +45,7 @@ class CustomerTaxDocumentValidationBrAddRule
     {
         if ($attributeCode == 'vat_id') {
             if ($this->config->isEnabled()) {
-                $add = ' required-entry';
+                $add = 'required-entry';
                 if ($this->config->getConfigByVatId('enabled_cpf') && $this->config->getConfigByVatId('enabled_cnpj')) {
                     $add .= Config::VAT_CPF_OR_CNPJ;
                 } elseif ($this->config->getConfigByVatId('enabled_cpf')) {
@@ -54,7 +54,7 @@ class CustomerTaxDocumentValidationBrAddRule
                     $add .= Config::VAT_ONLY_CNPJ;
                 }
 
-                return $result.$add;
+                return /** @scrutinizer ignore-type */ $result.' '.$add;
             }
         } elseif ($attributeCode == 'taxvat') {
             if ($this->config->getConfigByTaxvat('enabled_cpf') && $this->config->getConfigByTaxvat('enabled_cnpj')) {
@@ -65,7 +65,7 @@ class CustomerTaxDocumentValidationBrAddRule
                 $add = Config::VAT_ONLY_CNPJ;
             }
 
-            return $result.' '.$add;
+            return /** @scrutinizer ignore-type */ $result.' '.$add;
         }
 
         return $result;
