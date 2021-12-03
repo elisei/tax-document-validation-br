@@ -8,6 +8,7 @@ Status Atual
 
 [![Build Status](https://app.travis-ci.com/elisei/tax-document-validation-br.svg?branch=Magento%402.4)](https://app.travis-ci.com/elisei/tax-document-validation-br)
 [![StyleCI](https://github.styleci.io/repos/432332292/shield?branch=Magento@2.4)](https://github.styleci.io/repos/432330655?branch=Magento@2.4)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/elisei/tax-document-validation-br/badges/quality-score.png?b=Magento%402.4)](https://scrutinizer-ci.com/g/elisei/tax-document-validation-br/)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/939d6dc3ac134fb384b67075bda95022)](https://www.codacy.com/gh/elisei/tax-document-validation-br/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=elisei/tax-document-validation-br&amp;utm_campaign=Badge_Grade)
 
 Estatísticas
@@ -34,7 +35,7 @@ Esse campo está presente de forma nativa no formulários de endereço da conta 
 
 ### Implementação em Taxvat
 
-Esse campo está presente apenas no formulário de clientes (customer create account).
+De forma nativa, esse campo está presente apenas no formulário de clientes (customer create account).
 
 ## Instalação e Configuração
 
