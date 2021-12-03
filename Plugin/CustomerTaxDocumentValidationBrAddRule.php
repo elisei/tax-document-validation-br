@@ -41,12 +41,8 @@ class CustomerTaxDocumentValidationBrAddRule
      *
      * @return string
      */
-    public function aroundGetAttributeValidationClass(
-        /** @scrutinizer ignore-unused */ 
-        Address $subject,
-        callable $proceed,
-        string $args
-    ): string {
+    public function aroundGetAttributeValidationClass(Address $subject, callable $proceed, string $args): string
+    {
         $result = $proceed($args);
         if ($args == 'vat_id') {
             if ($this->config->isEnabled()) {
