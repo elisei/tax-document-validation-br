@@ -35,13 +35,13 @@ class CustomerTaxDocumentValidationBrAddRule
     /**
      * Add Class to VatId.
      *
-     * @param Address   $subject
-     * @param callable  $proceed
-     * @param string    $args
+     * @param Address  $subject
+     * @param callable $proceed
+     * @param string   $args
      *
      * @return string
      */
-    public function aroundGetAttributeValidationClass(Address $subject, callable $proceed, string $args): string
+    public function aroundGetAttributeValidationClass(/** @scrutinizer ignore-unused */ Address $subject, callable $proceed, string $args): string
     {
         $result = $proceed($args);
         if ($args == 'vat_id') {
