@@ -23,6 +23,11 @@ class CheckoutTaxDocumentValidationBrAddRule
     private $config;
 
     /**
+     * @var BrazilianDocument
+     */
+    private $brazilianDocument;
+
+    /**
      * @param Config            $config
      * @param BrazilianDocument $brazilianDocument
      */
