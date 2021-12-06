@@ -39,7 +39,7 @@ De forma nativa, esse campo está presente apenas no formulário de clientes (cu
 
 ## Instalação e Configuração
 
-Visite nossa [Wiki](wiki) e veja como configurar e instalar nosso módulo.
+Visite nossa [Wiki](https://github.com/elisei/tax-document-validation-br/wiki) e veja como configurar e instalar nosso módulo.
 
 ## License
 
