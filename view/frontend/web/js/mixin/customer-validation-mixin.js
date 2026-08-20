@@ -8,6 +8,35 @@ define(['jquery'], function($) {
 	'use strict';
 
 	return function() {
+		var normalizeDigits = function (value) {
+			return (value || "").replace(/[^\d]+/g, "");
+		};
+
+		var normalizeAlphaNumeric = function (value) {
+			return (value || "").replace(/[^0-9a-z]+/gi, "").toUpperCase();
+		};
+
+		var hasLetters = function (value) {
+			return /[A-Z]/.test(normalizeAlphaNumeric(value));
+		};
+
+		var cnpjFirstWeights = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+		var cnpjSecondWeights = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
+
+		var getAlphaNumericValue = function (character) {
+			return character.charCodeAt(0) - 48;
+		};
+
+		var calculateCheckDigit = function (base, weights) {
+			var sum = 0;
+
+			base.split("").forEach(function (character, index) {
+				sum += getAlphaNumericValue(character) * weights[index];
+			});
+
+			var remainder = sum % 11;
+			return remainder < 2 ? 0 : 11 - remainder;
+		};
 
 		/**
 		 * Invalidate Common CNPJ
@@ -55,7 +84,7 @@ define(['jquery'], function($) {
 		 * Validate CPF
 		 */
 		var validateCPF = function (value) {
-			let cpf = value.replace(/[^\d]+/g, "");
+			let cpf = normalizeDigits(value);
 
 			if (cpf.length !== 11) {
 				return false;
@@ -103,7 +132,7 @@ define(['jquery'], function($) {
 		 * Validate CNPJ
 		 */
 		var validateCNPJ = function (value) {
-			let cnpj = value.replace(/[^\d]+/g, "");
+			let cnpj = normalizeDigits(value);
 
 			if (cnpj.length !== 14) {
 				return false;
@@ -153,17 +182,50 @@ define(['jquery'], function($) {
 		};
 
 		/**
+		 * Validate alphanumeric CNPJ format.
+		 */
+		var validateAlphaNumericCNPJ = function (value) {
+			let cnpj = normalizeAlphaNumeric(value);
+
+			if (cnpj.length !== 14) {
+				return false;
+			}
+
+			if (!/[A-Z]/.test(cnpj)) {
+				return validateCNPJ(cnpj);
+			}
+
+			if (!/^[A-Z0-9]{12}\d{2}$/.test(cnpj)) {
+				return false;
+			}
+
+			var base = cnpj.substring(0, 12);
+			var firstDigit = calculateCheckDigit(base, cnpjFirstWeights);
+			var secondDigit = calculateCheckDigit(base + firstDigit, cnpjSecondWeights);
+
+			return cnpj === base + firstDigit.toString() + secondDigit.toString();
+		};
+
+		/**
 		 * Add Validation CPF/CNPJ
 		 */
 		$.validator.addMethod(
 			"vatid-br-rule-cpf-or-cnpj",
 			function (value) {
-				if (value.replace(/[^\d]+/g, "").length === 14) {
+				var normalizedAlphaNumeric = normalizeAlphaNumeric(value);
+				var normalizedDigits = normalizeDigits(value);
+
+				if (hasLetters(value) && normalizedAlphaNumeric.length === 14) {
+					return validateAlphaNumericCNPJ(value);
+				}
+				if (normalizedDigits.length === 14) {
 					return validateCNPJ(value);
 				}
-				if (value.replace(/[^\d]+/g, "").length === 11) {
+				if (normalizedDigits.length === 11) {
 					return validateCPF(value);
 				}
+
+				return false;
 			},
 			$.mage.__('Please provide a valid tax document (CPF/CNPJ)')
 		);
@@ -174,9 +236,11 @@ define(['jquery'], function($) {
 		$.validator.addMethod(
 			"vatid-br-rule-only-cpf",
 			function (value) {
-				if (value.replace(/[^\d]+/g, "").length === 11) {
+				if (normalizeDigits(value).length === 11) {
 					return validateCPF(value);
 				}
+
+				return false;
 			},
 			$.mage.__("Please provide a valid tax document (CPF)")
 		);
@@ -187,9 +251,14 @@ define(['jquery'], function($) {
 		$.validator.addMethod(
 			"vatid-br-rule-only-cnpj",
 			function (value) {
-				if (value.replace(/[^\d]+/g, "").length === 11) {
-					return validateCPF(value);
+				if (hasLetters(value) && normalizeAlphaNumeric(value).length === 14) {
+					return validateAlphaNumericCNPJ(value);
 				}
+				if (normalizeDigits(value).length === 14) {
+					return validateCNPJ(value);
+				}
+
+				return false;
 			},
 			$.mage.__("Please provide a valid tax document (CNPJ)")
 		)
